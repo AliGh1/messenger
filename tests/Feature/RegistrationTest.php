@@ -42,6 +42,7 @@ class RegistrationTest extends TestCase
 
         $response = $this->post('/register', [
             'name' => 'Test User',
+            'username' => 'TEST_user',
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
@@ -49,6 +50,9 @@ class RegistrationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
+
+        $this->assertEquals('test_user', \Auth::user()->username);
+
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 }
