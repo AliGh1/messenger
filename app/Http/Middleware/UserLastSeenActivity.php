@@ -19,11 +19,11 @@ class UserLastSeenActivity
         if ((! $request->user()) || $this->isNotDirty() )
             return $next($request);
 
-        $user = $request->user()->update([
+        $request->user()->update([
             'last_seen' => now()
         ]);
 
-        \Session::put('last_seen', $user->last_seen);
+        \Session::put('last_seen', now());
 
         return $next($request);
     }

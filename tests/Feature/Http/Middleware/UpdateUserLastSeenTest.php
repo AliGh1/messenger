@@ -30,6 +30,7 @@ class UpdateUserLastSeenTest extends TestCase
 
         $response = $this->get('/');
         $response->assertSessionHas('last_seen');
+        $response->assertStatus(200);
 
 
         $new_last_seen = Carbon::parse($user->fresh()->last_seen)->toDateTimeString();
@@ -50,6 +51,7 @@ class UpdateUserLastSeenTest extends TestCase
 
         $response = $this->get('/');
         $response->assertSessionHas('last_seen');
+        $response->assertStatus(200);
 
 
         $new_last_seen = Carbon::parse($user->fresh()->last_seen)->toDateTimeString();
