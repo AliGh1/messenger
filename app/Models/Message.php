@@ -11,6 +11,13 @@ class Message extends Model
     use HasFactory;
 
     /**
+     * All the relationships to be touched.
+     *
+     * @var array
+     */
+    protected $touches = ['chat'];
+
+    /**
      * The attributes that should be cast.
      *
      * @var array
@@ -19,4 +26,8 @@ class Message extends Model
         'status' => MessageStatus::class,
     ];
 
+    public function chat(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Chat::class);
+    }
 }
