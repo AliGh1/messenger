@@ -1,13 +1,14 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import {usePage} from "@inertiajs/inertia-vue3";
+import ChatItem from "@/Components/ChatItem.vue";
 import {computed} from "vue";
+
 defineProps({
-    chats: Object,
+    chats: Array,
 });
 
 const user = computed(() => usePage().props.value.user)
-
 
 </script>
 
@@ -24,24 +25,11 @@ const user = computed(() => usePage().props.value.user)
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="grid grid-cols-3">
                         <aside class="col-span-1 divide-y border-r">
-                            <div v-for="chat in chats">
-                                <div class="flex p-4 items-center">
-                                    <img class="h-11 w-11 rounded-full object-cover" :src="chat.profile_photo_url" :alt="chat.name">
-                                    <div class="ml-4 flex flex-col">
-                                        <span class="text-gray-900">
-                                            {{ chat.name }}
-                                        </span>
-                                        <span class="text-gray-500 text-sm">
-                                            @{{ chat.username}}
-                                        </span>
-                                    </div>
-                                    <span class="text-gray-500 text-sm self-start ml-auto">
-                                            {{ chat.updated_at}}
-                                    </span>
-                                </div>
-                            </div>
+                            <ChatItem :chat="chat" v-for="chat in chats" :key="chat.id"/>
                         </aside>
-                        <section class="col-span-2 p-4">texts</section>
+                        <section class="col-span-2 grid place-content-center">
+                            <span class="px-4 py-1 bg-gray-100 text-gray-500 rounded-full">Select a chat to start messaging</span>
+                        </section>
                     </div>
                 </div>
             </div>
